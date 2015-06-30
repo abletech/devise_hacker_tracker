@@ -1,7 +1,7 @@
 class DeviseCreateSignInFailures < ActiveRecord::Migration
   def change
     create_table(:sign_in_failures, id: :uuid) do |t|
-      t.uuid :<%= table_name.singularize %>_id
+      t.<%= Devise.model_identifier_type %> :<%= Devise.model_identifer_column_name %>
       t.inet :ip_address
       t.string :user_agent
 

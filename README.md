@@ -26,7 +26,18 @@ Or install it yourself as:
 
 ## Usage
 
-Add :sign_in_failures to devise in your model and association to the login records. Example for User model:
+Generate the config additions and migrations, where `MODEL` is the name of your devise model (most likely `users`)
+```bash
+rails generate devise_sign_in_failures MODEL
+```
+
+This will prompt you to answer the following questions. Hit return to use the default values, or enter a different value if required.
+```
+What is the name of a unique identifier on your users table? (default: 'email')
+What is the name the type of the users email attribute? (default: 'string')
+```
+
+You can then add :sign_in_failures to devise from within your model. For example:
 
 ```ruby
 class User < ActiveRecord::Base
