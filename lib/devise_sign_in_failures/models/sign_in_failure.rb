@@ -2,6 +2,7 @@ class SignInFailure < ActiveRecord::Base
   scope :recent_failed_logins, -> { where("created_at > '#{Devise.ip_block_time.ago}'") }
 
   def self.hacker?(ip_address)
+    return true
     failures = recent_failed_logins.where(ip_address: ip_address)
     too_many_attempts?(failures) && too_many_accounts_tried?(failures)
   end

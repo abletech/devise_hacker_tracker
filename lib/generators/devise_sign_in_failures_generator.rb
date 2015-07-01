@@ -3,7 +3,7 @@ require 'rails/generators/active_record'
 class DeviseSignInFailuresGenerator < ActiveRecord::Generators::Base
   source_root File.expand_path("../templates", __FILE__)
 
-  def setup
+  def setup_sign_in_failures_configuration
     Devise.model_name = table_name.singularize unless table_name.blank?
 
     devise_initializer_path = "config/initializers/devise.rb"
@@ -37,6 +37,10 @@ class DeviseSignInFailuresGenerator < ActiveRecord::Generators::Base
         end
       end
     end
+  end
+
+  def setup_sign_in_failures_locales
+    copy_file "../../../config/locales/en.yml", "config/locales/devise_hacker_tracker.en.yml"
   end
 
   def create_sign_in_failures_migration
