@@ -3,7 +3,9 @@ require 'devise_hacker_tracker/models/sign_in_failure'
 module HackerTracker
 
   def self.hacker?(ip_address)
-    failures = SignInFailure.recent_failed_logins.where(ip_address: ip_address)
+    SignInFailure.clear_outdated!
+
+    failures = SignInFailure.recent.where(ip_address: ip_address)
     too_many_attempts?(failures) && too_many_accounts_tried?(failures)
   end
 
