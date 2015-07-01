@@ -37,11 +37,26 @@ What is the name of a unique identifier on your users table? (default: 'email')
 What is the name the type of the users email attribute? (default: 'string')
 ```
 
-You can then add :hacker_tracker to devise from within your model. For example:
+The generator will create the following new files
+- db/migrate/devise_create_sign_in_failures.rb
+- config/locales/devise_hacker_tracker.en.yml
+and also add some configuration options to `config/initializers/devise.rb`
 
-```ruby
-class User < ActiveRecord::Base
-  devise :database_authenticatable, ..... , :hacker_tracker
+Run `rake db:migrate` to create the new sign_in_failures database table, to store failed sign in attempts.
+
+You can then prevent a user from signing in if they have made to many attempts at different accounts by adding the following code to your Devise sessions controller (you may need to create this controller if you haven't already. Follow the [devise explanation here](https://github.com/plataformatec/devise#configuring-controllers)). You can change the flash message and redirection path as appropriate for you application.
+
+```
+class SessionsController < Devise::SessionsController
+
+  def create
+    if HackerTracker.hacker?(request.remote_ip)
+      set_flash_message :alert, :ip_blocked
+      redirect_to new_user_session_path
+    else
+      super
+    end
+  end
 
 end
 ```
@@ -55,7 +70,6 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/AbleTech/devise_hacker_tracker.
-
 
 ## License
 
