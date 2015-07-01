@@ -1,4 +1,4 @@
-# DeviseSignInFailures
+# DeviseHackerTracker
 Track failed attempts to sign in through devise.
 
 This can allow for increased security measures, such as locking sign in after multiple failed attempts on different accounts from a single IP address.
@@ -13,7 +13,7 @@ This can allow for increased security measures, such as locking sign in after mu
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'devise_sign_in_failures'
+gem 'devise_hacker_tracker'
 ```
 
 And then execute:
@@ -22,13 +22,13 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install devise_sign_in_failures
+    $ gem install devise_hacker_tracker
 
 ## Usage
 
 Generate the config additions and migrations, where `MODEL` is the name of your devise model (most likely `users`)
 ```bash
-rails generate devise_sign_in_failures MODEL
+rails generate devise_hacker_tracker MODEL
 ```
 
 This will prompt you to answer the following questions. Hit return to use the default values, or enter a different value if required.
@@ -37,11 +37,11 @@ What is the name of a unique identifier on your users table? (default: 'email')
 What is the name the type of the users email attribute? (default: 'string')
 ```
 
-You can then add :sign_in_failures to devise from within your model. For example:
+You can then add :hacker_tracker to devise from within your model. For example:
 
 ```ruby
 class User < ActiveRecord::Base
-  devise :database_authenticatable, ..... , :sign_in_failures
+  devise :database_authenticatable, ..... , :hacker_tracker
 
 end
 ```
@@ -54,7 +54,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/AbleTech/devise_sign_in_failures.
+Bug reports and pull requests are welcome on GitHub at https://github.com/AbleTech/devise_hacker_tracker.
 
 
 ## License

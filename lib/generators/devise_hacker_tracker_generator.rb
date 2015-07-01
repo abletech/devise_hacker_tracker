@@ -1,22 +1,22 @@
 require 'rails/generators/active_record'
 
-class DeviseSignInFailuresGenerator < ActiveRecord::Generators::Base
+class DeviseHackerTrackerGenerator < ActiveRecord::Generators::Base
   source_root File.expand_path("../templates", __FILE__)
 
-  def setup_sign_in_failures_configuration
+  def setup_hacker_tracker_configuration
     Devise.model_name = table_name.singularize unless table_name.blank?
 
     devise_initializer_path = "config/initializers/devise.rb"
     if File.exist?(devise_initializer_path)
       old_content = File.read(devise_initializer_path)
 
-      if old_content.match(Regexp.new(/^\s# ==> Configuration for :sign_in_failures\n/))
+      if old_content.match(Regexp.new(/^\s# ==> Configuration for :hacker_tracker\n/))
         false
       else
         inject_into_file(devise_initializer_path, :before => "  # ==> Configuration for :confirmable\n") do
           id_response = ask "What is the name of a unique identifier on your #{table_name} table? (default: '#{Devise.model_identifier}')"
           type_response = ask "What is the name the type of the #{Devise.model_name} #{Devise.model_identifier} attribute? (default: '#{Devise.model_identifier_type}')"
-" # ==> Configuration for :sign_in_failures
+" # ==> Configuration for :hacker_tracker
   # Amount of time an IP address stays blocked for
   # config.ip_block_time = 5.minutes
   #
@@ -39,11 +39,11 @@ class DeviseSignInFailuresGenerator < ActiveRecord::Generators::Base
     end
   end
 
-  def setup_sign_in_failures_locales
+  def setup_hacker_tracker_locales
     copy_file "../../../config/locales/en.yml", "config/locales/devise_hacker_tracker.en.yml"
   end
 
-  def create_sign_in_failures_migration
+  def create_hacker_tracker_migration
     migration_template "migration.rb", "db/migrate/devise_create_sign_in_failures.rb"
   end
 
