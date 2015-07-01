@@ -17,11 +17,17 @@ class DeviseSignInFailuresGenerator < ActiveRecord::Generators::Base
           id_response = ask "What is the name of a unique identifier on your #{table_name} table? (default: '#{Devise.model_identifier}')"
           type_response = ask "What is the name the type of the #{Devise.model_name} #{Devise.model_identifier} attribute? (default: '#{Devise.model_identifier_type}')"
 " # ==> Configuration for :sign_in_failures
-  # Note: Do not change these config fields unless you have changed these fields in the database
+  # Amount of time an IP address stays blocked for
+  # config.ip_block_time = 5.minutes
   #
+  # Total number of failed sign in attempts allowed per IP address before being blocked
+  # config.maximum_attempts_per_ip = #{Devise.maximum_attempts_per_ip}
+  # Total number accounts a single IP address is allowed to attempt before being blocked
+  # config.maximum_accounts_attempted = #{Devise.maximum_accounts_attempted}
+  #
+  # Model fields: do not change the config fields below unless you have changed these fields in the database
   # The name of the devise model you are using
   # config.model_name = #{Devise.model_name}
-  #
   # A unique identifer for the devise model you are using
   # config.model_identifier = #{Devise.model_identifier}
   # The type of the unique model_identifier used
