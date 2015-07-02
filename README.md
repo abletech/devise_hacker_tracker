@@ -18,7 +18,7 @@ gem 'devise_hacker_tracker', :git => 'https://github.com/AbleTech/devise_hacker_
 
 And then execute:
 
-    $ bundle
+    $ bundle install
 
 ## Usage
 
@@ -34,14 +34,14 @@ The generator will create the following new files
 - db/migrate/devise_create_sign_in_failures.rb
 - config/locales/devise_hacker_tracker.en.yml
 
-and also add some configuration options to config/initializers/devise.rb
+and also add some configuration options to config/initializers/devise.rb.
 
-Then create the new sign_in_failures database table, to store failed sign in attempts, by running:
+Create the new `sign_in_failures` database table by running:
 ```bash
 $ rake db:migrate`
 ```
 
-You can then prevent a user from signing in if they have made to many attempts at different accounts by adding the following code to your Devise sessions controller (you may need to create this controller if you haven't already. Follow the [devise explanation here](https://github.com/plataformatec/devise#configuring-controllers)). You can change the flash message and redirection path as appropriate for you application.
+You can then prevent a user from signing in, if they have made too many attempts at different accounts, by adding the following code to your Devise sessions controller (you may need to create this controller if you haven't already. Follow the [devise explanation here](https://github.com/plataformatec/devise#configuring-controllers)). You can change the flash message and redirection path as appropriate for you application.
 
 ```ruby
 class SessionsController < Devise::SessionsController
