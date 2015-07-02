@@ -1,0 +1,4 @@
+en:
+  devise:
+    sessions:
+      ip_blocked: "Sorry, your IP address has been temporarily blocked from signing in."

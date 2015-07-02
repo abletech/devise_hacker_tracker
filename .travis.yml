@@ -2,3 +2,13 @@ language: ruby
 rvm:
   - 2.2.2
 before_install: gem install bundler -v 1.10.4
+cache:
+  - apt
+  - bundler
+# With this, feature branches will only be built when a Pull Request is sent
+branches:
+  only:
+    - master
+    - develop
+    - /^release\/.*$/
+    - /^hotfix\/.*$/
