@@ -1,5 +1,5 @@
 $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
-require 'devise_hacker_tracker/models/hacker_tracker'
+require 'devise_hacker_tracker'
 require 'database_cleaner'
 require 'factory_girl'
 require 'factories'
@@ -11,7 +11,8 @@ ActiveRecord::Schema.define do
   self.verbose = false
 
   create_table :sign_in_failures, :force => true do |t|
-    t.string :user_email
+    t.string :email
+    t.string :another_key
     t.string :ip_address
     t.string :user_agest
 

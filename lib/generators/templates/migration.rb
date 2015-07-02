@@ -1,7 +1,7 @@
-class DeviseCreateSignInFailures < ActiveRecord::Migration
+class DeviseCreate<%= table_name.camelcase %> < ActiveRecord::Migration
   def change
-    create_table(:sign_in_failures, id: :uuid) do |t|
-      t.<%= Devise.model_identifier_type %> :<%= Devise.model_identifer_column_name %>
+    create_table(:<%= table_name %>) do |t|
+<% Devise.authentication_keys.each { |key| %><%= "\n\t\t\tt.string :#{key}" %><% } %>
       t.string :ip_address
       t.string :user_agent
 

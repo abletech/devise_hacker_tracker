@@ -1,6 +1,7 @@
 FactoryGirl.define do
   factory :sign_in_failure do
-    user_email "test@eg.com"
+    email "test@eg.com"
+    another_key 'testing'
     ip_address  "1.2.3.4"
   end
 end

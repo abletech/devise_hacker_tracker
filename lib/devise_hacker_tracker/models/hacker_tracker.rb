@@ -16,7 +16,7 @@ module HackerTracker
   end
 
   def self.too_many_accounts_tried?(failures)
-    failures.distinct.count(Devise.model_identifer_column_name) >= Devise.maximum_accounts_attempted
+    failures.distinct.count(*Devise.authentication_keys) >= Devise.maximum_accounts_attempted
   end
 
 end

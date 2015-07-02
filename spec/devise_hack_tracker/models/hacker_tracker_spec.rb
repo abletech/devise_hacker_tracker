@@ -9,7 +9,13 @@ describe HackerTracker do
     subject(:is_hacker) { HackerTracker.hacker?(ip_address) }
 
     context "with a maximum of 2 accounts failed before locking" do
-      let(:devise_config){ { maximum_attempts_per_ip: 1, maximum_accounts_attempted: 1, ip_block_time: 5.minutes, model_identifer_column_name: 'user_email' } }
+      let(:devise_config){{
+        maximum_attempts_per_ip: 1,
+        maximum_accounts_attempted: 1,
+        ip_block_time: 5.minutes,
+        sign_in_failures_table_name: 'sign_in_failures',
+        authentication_keys: [:email, :another_key]
+      }}
 
       context 'with no existing sign in failures' do
         it "does not detect a hacker" do
@@ -51,7 +57,13 @@ describe HackerTracker do
     end
 
     context "with a maximum of 2 accounts failed before locking" do
-      let(:devise_config){ { maximum_attempts_per_ip: 1, maximum_accounts_attempted: 2, ip_block_time: 5.minutes, model_identifer_column_name: 'user_email' } }
+      let(:devise_config){{
+        maximum_attempts_per_ip: 1,
+        maximum_accounts_attempted: 2,
+        ip_block_time: 5.minutes,
+        sign_in_failures_table_name: 'sign_in_failures',
+        authentication_keys: [:email, :another_key]
+      }}
 
       context 'with an a recent failures on only 1 account' do
         before { create(:sign_in_failure) }
@@ -75,7 +87,7 @@ describe HackerTracker do
       context 'with an 2 recent failures on 2 accounts' do
         before do
           create(:sign_in_failure)
-          create(:sign_in_failure, user_email: 'another@eg.com')
+          create(:sign_in_failure, email: 'another@eg.com')
         end
 
         it "detects a hacker" do

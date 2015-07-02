@@ -26,27 +26,26 @@ Or install it yourself as:
 
 ## Usage
 
-Generate the config additions and migrations, where `MODEL` is the name of your devise model (most likely `users`)
+To setup the gem and generate the relevant config additions and migrations, run:
 ```bash
-rails generate devise_hacker_tracker MODEL
+$ rails generate devise_hacker_tracker sign_in_failures
 ```
+- To change the name of the database table storing the failed sign in attempts, replace `sign_in_failures` to your preferred name
 
-This will prompt you to answer the following questions. Hit return to use the default values, or enter a different value if required.
-```
-What is the name of a unique identifier on your users table? (default: 'email')
-What is the name the type of the users email attribute? (default: 'string')
-```
 
 The generator will create the following new files
 - db/migrate/devise_create_sign_in_failures.rb
 - config/locales/devise_hacker_tracker.en.yml
 and also add some configuration options to `config/initializers/devise.rb`
 
-Run `rake db:migrate` to create the new sign_in_failures database table, to store failed sign in attempts.
+Create the new sign_in_failures database table, to store failed sign in attempts, by running:
+```bash
+$ rake db:migrate`
+```
 
 You can then prevent a user from signing in if they have made to many attempts at different accounts by adding the following code to your Devise sessions controller (you may need to create this controller if you haven't already. Follow the [devise explanation here](https://github.com/plataformatec/devise#configuring-controllers)). You can change the flash message and redirection path as appropriate for you application.
 
-```
+```ruby
 class SessionsController < Devise::SessionsController
 
   def create
@@ -60,12 +59,6 @@ class SessionsController < Devise::SessionsController
 
 end
 ```
-
-## Development
-
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake rspec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
-
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
 
 ## Contributing
 
