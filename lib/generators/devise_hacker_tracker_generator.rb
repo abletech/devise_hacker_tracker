@@ -3,6 +3,10 @@ require 'rails/generators/active_record'
 class DeviseHackerTrackerGenerator < ActiveRecord::Generators::Base
   source_root File.expand_path("../templates", __FILE__)
 
+  desc "Generates a model and migration with the given NAME to store failed sign in attempts and adds to the devise configuration."
+
+  class_option :uuid, desc: "Enable uuid as the index for NAME table", type: :boolean, default: false
+
   def setup_hacker_tracker_configuration
     devise_initializer_path = "config/initializers/devise.rb"
     if File.exist?(devise_initializer_path)
@@ -36,6 +40,7 @@ class DeviseHackerTrackerGenerator < ActiveRecord::Generators::Base
   end
 
   def create_hacker_tracker_migration
+    @uuid_enabled = options.uuid
     migration_template "migration.rb", "db/migrate/devise_create_#{table_name}.rb"
   end
 

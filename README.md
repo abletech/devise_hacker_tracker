@@ -13,16 +13,12 @@ This can allow for increased security measures, such as locking sign in after mu
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'devise_hacker_tracker'
+gem 'devise_hacker_tracker', :git => 'https://github.com/AbleTech/devise_hacker_tracker.git', branch: 'develop'
 ```
 
 And then execute:
 
     $ bundle
-
-Or install it yourself as:
-
-    $ gem install devise_hacker_tracker
 
 ## Usage
 
@@ -30,15 +26,17 @@ To setup the gem and generate the relevant config additions and migrations, run:
 ```bash
 $ rails generate devise_hacker_tracker sign_in_failures
 ```
-- To change the name of the database table storing the failed sign in attempts, replace `sign_in_failures` to your preferred name
+- To change the name of the database table storing the failed sign in attempts, replace `sign_in_failures` with your preferred name
+- To use uuid as the index for the `sign_in_failures` table, add the flag `--enable-uuid`
 
 
 The generator will create the following new files
 - db/migrate/devise_create_sign_in_failures.rb
 - config/locales/devise_hacker_tracker.en.yml
-and also add some configuration options to `config/initializers/devise.rb`
 
-Create the new sign_in_failures database table, to store failed sign in attempts, by running:
+and also add some configuration options to config/initializers/devise.rb
+
+Then create the new sign_in_failures database table, to store failed sign in attempts, by running:
 ```bash
 $ rake db:migrate`
 ```
