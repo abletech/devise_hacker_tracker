@@ -13,7 +13,7 @@ This can allow for increased security measures, such as locking sign in after mu
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'devise_hacker_tracker', :git => 'https://github.com/AbleTech/devise_hacker_tracker.git', branch: 'develop'
+gem 'devise_hacker_tracker'
 ```
 
 And then execute:
@@ -41,7 +41,7 @@ Create the new `sign_in_failures` database table by running:
 $ rake db:migrate
 ```
 
-You can then prevent a user from signing in, if they have made too many attempts at different accounts, by adding the following code to your Devise sessions controller (you may need to create this controller if you haven't already. Follow the [devise explanation here](https://github.com/plataformatec/devise#configuring-controllers)). You can change the flash message and redirection path as appropriate for you application.
+You can then prevent a user from signing in, if they have made too many attempts at different accounts, by adding the following code to your Devise sessions controller (you may need to create this controller if you haven't already. Follow the [devise explanation here](https://github.com/plataformatec/devise#configuring-controllers)). You can change the flash message and redirection path as appropriate for your application.
 
 ```ruby
 class SessionsController < Devise::SessionsController

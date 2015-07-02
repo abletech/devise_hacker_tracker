@@ -3,7 +3,6 @@ require 'devise_hacker_tracker'
 require 'database_cleaner'
 require 'factory_girl'
 require 'factories'
-require 'byebug'
 
 ActiveRecord::Base.establish_connection(:adapter => "sqlite3", :database => ":memory:")
 
